@@ -46,8 +46,15 @@ type bigstring = Angstrom.bigstring
 val parse : t Angstrom.t
 val serialize : t -> Faraday.t -> unit
 
-val of_string    : string    -> (t, string) Result.result
-val of_bigstring : bigstring -> (t, string) Result.result
+val of_string  
+  :  string    
+  -> consume:Angstrom.Consume.t 
+  -> (t, string) Result.result
+
+val of_bigstring 
+  :  bigstring 
+  -> consume:Angstrom.Consume.t 
+  -> (t, string) Result.result
 
 val to_string    : t -> string
 val to_bigstring : t -> bigstring
@@ -75,11 +82,13 @@ module With_number : sig
   val of_string
     : (string -> ('number, string) Result.result)
     -> string
+    -> consume:Angstrom.Consume.t
     -> ('number t, string) Result.result
 
   val of_bigstring
     : (string -> ('number, string) Result.result)
     -> Angstrom.bigstring
+    -> consume:Angstrom.Consume.t
     -> ('number t, string) Result.result
 
   val to_string
